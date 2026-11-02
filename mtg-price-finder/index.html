@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f3ec">
+  <title>Mana Market — MTG card finder</title>
+  <style>
+    :root{color-scheme:light;--ink:#19251f;--muted:#65736b;--paper:#f5f3ec;--panel:#fffefa;--line:#dedfd4;--green:#315b45;--mint:#e7efe6;--gold:#a87728;--red:#a34136;--shadow:0 12px 35px #18251b0c}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}.shell{max-width:1120px;margin:auto;padding:32px 24px 64px}.topline{display:flex;align-items:center;justify-content:space-between;margin-bottom:34px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.04em;font-size:19px}.sigil{width:38px;height:38px;border-radius:13px;background:var(--green);color:white;display:grid;place-items:center;font-size:20px}.local{font-size:12px;color:var(--muted);border:1px solid var(--line);background:#ffffff8c;border-radius:999px;padding:7px 11px}.hero{margin:0 auto 27px;max-width:780px;text-align:center}.eyebrow{color:var(--green);font-size:11px;text-transform:uppercase;letter-spacing:.16em;font-weight:800}.hero h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(36px,6vw,57px);line-height:1.08;letter-spacing:-.045em;margin:9px 0 12px}.hero p{color:var(--muted);max-width:600px;margin:auto}.card{border:1px solid var(--line);background:var(--panel);border-radius:18px;box-shadow:var(--shadow)}.search{padding:20px;margin:28px auto;max-width:900px}.label{display:block;font-size:12px;font-weight:750;margin-bottom:8px}.searchrow{display:flex;gap:9px}.input{width:100%;border:1px solid #d5d9ce;border-radius:11px;padding:12px 14px;color:var(--ink);background:#fff;outline:none}.input:focus{border-color:#71907a;box-shadow:0 0 0 3px #315b451b}.primary,.secondary,.quiet,.remove{border:0;border-radius:10px;padding:11px 15px;font-weight:700}.primary{background:var(--green);color:#fff}.primary:hover{background:#254a36}.secondary{background:var(--mint);color:var(--green)}.quiet{background:transparent;color:var(--muted);padding:8px}.searchhint{font-size:12px;color:var(--muted);margin:9px 2px 0}.status{min-height:20px;font-size:13px;color:var(--muted);margin-top:8px}.workspace{display:grid;grid-template-columns:1fr 290px;gap:18px;align-items:start}.sectionhead{display:flex;align-items:baseline;justify-content:space-between;margin:4px 2px 11px}.sectionhead h2{font-size:19px;letter-spacing:-.02em;margin:0}.count{font-size:12px;color:var(--muted)}.tablewrap{overflow:auto}.results{width:100%;border-collapse:collapse;min-width:590px}.results th{text-align:left;padding:12px 14px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em;border-bottom:1px solid var(--line)}.results td{padding:13px 14px;border-bottom:1px solid #eeeee7;vertical-align:middle}.results tr:last-child td{border-bottom:0}.results th:first-child,.results td:first-child{padding-left:18px}.cardcell{display:flex;align-items:center;gap:12px;min-width:200px}.thumb{width:42px;height:58px;object-fit:cover;border-radius:5px;background:var(--mint);box-shadow:0 2px 6px #19251f1c}.thumb.placeholder{display:grid;place-items:center;color:var(--green);font-size:19px}.cardname{font-weight:750}.cardset{font-size:11px;color:var(--muted)}.storelink{color:var(--green);font-weight:700;text-decoration:none}.storelink:hover{text-decoration:underline}.check{color:var(--gold);font-size:12px;font-weight:700}.empty{padding:44px 18px;text-align:center;color:var(--muted)}.empty b{display:block;color:var(--ink);margin-bottom:4px}.side{padding:17px}.side h2{font-size:16px;margin:1px 0 4px}.sidecopy{font-size:12px;color:var(--muted);margin:0 0 15px}.siteform{display:grid;gap:8px}.siteform .input{font-size:13px;padding:10px}.siteform .primary{font-size:13px}.sites{list-style:none;margin:14px 0 0;padding:0}.sites li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 0;border-top:1px solid #eeeee7}.siteinfo{min-width:0}.sitename{font-size:13px;font-weight:700}.siteurl{font-size:10px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:190px}.remove{padding:5px 8px;background:#f7e9e5;color:var(--red);font-size:11px}.wish{margin-top:18px;padding:16px}.wishhead{display:flex;justify-content:space-between;align-items:center}.wish h2{font-size:16px;margin:0}.wishlist{display:grid;gap:7px;margin-top:12px}.wishitem{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#f7f7f1;border-radius:9px;padding:8px 10px;font-size:12px}.wishitem span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.wishitem button{border:0;background:none;color:var(--red);font-weight:700}.note{font-size:11px;color:var(--muted);line-height:1.5;margin:12px 1px 0}.foot{margin:23px 2px 0;color:var(--muted);font-size:11px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#19251f;color:#fff;border-radius:10px;padding:10px 15px;font-size:13px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}
+    @media(max-width:800px){.workspace{grid-template-columns:1fr}.side{grid-row:2}.search{padding:16px}.topline{margin-bottom:24px}}@media(max-width:520px){.shell{padding:21px 14px 45px}.searchrow{flex-direction:column}.searchrow .primary{width:100%}.local{font-size:10px}.results td{padding:11px 10px}}
+  </style>
+  <style>
+    [hidden]{display:none!important}.workspace{grid-template-columns:1fr}.pageTabs{display:flex;gap:5px;background:#e9e9df;padding:4px;border-radius:12px}.pageTab{border:0;border-radius:9px;padding:9px 13px;background:transparent;color:var(--muted);font-size:13px;font-weight:700}.pageTab.active{background:var(--panel);color:var(--green);box-shadow:0 2px 6px #18251f12}.navCount{display:inline-grid;place-items:center;min-width:19px;height:19px;margin-left:3px;padding:0 5px;border-radius:99px;background:var(--mint);font-size:10px}.cardinputs{display:grid;gap:9px}.cardinputrow{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:9px}.cardinputrow .input{min-height:45px}.cardindex{color:var(--muted);font-size:12px;font-weight:700;text-align:center}.removeCard{border:0;background:transparent;color:var(--red);font-size:12px;padding:8px}.searchactions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}.wishlistPage{margin-top:25px}.wishlistPage .sectionhead{align-items:center}.wishlistPage .sectionhead h1{font-family:Georgia,serif;font-size:36px;font-weight:500;line-height:1.1;margin:5px 0 0}.wishControls{display:flex;align-items:center;gap:12px}.wishlistTable{min-width:680px}.wishlistPage .tablewrap{box-shadow:var(--shadow)}
+    .shopSettings{max-width:760px;padding:20px}.shopSettings .siteurl{max-width:420px}.shopResult{display:grid;justify-items:start;gap:4px;min-width:135px}.shopThumb{width:44px;height:61px;object-fit:cover;border-radius:5px;box-shadow:0 2px 6px #19251f1c}.printingName{font-size:13px}.shopPrice{font-size:18px;letter-spacing:-.02em}.skipPrinting{border:0;border-radius:8px;background:#f7e9e5;color:var(--red);font-size:11px;font-weight:700;padding:6px 9px;margin-top:3px}.skipPrinting:hover{background:#f1d9d3}
+    @media(max-width:800px){.topline{flex-wrap:wrap;gap:12px}.pageTabs{order:3;width:100%;justify-content:center}.wishlistPage .sectionhead{align-items:flex-start}.wishControls{flex-wrap:wrap;justify-content:flex-end}}
+    @media(max-width:520px){.searchactions{align-items:stretch;flex-direction:column}.searchactions button{width:100%}.wishControls{gap:6px}.wishlistPage .sectionhead h1{font-size:30px}.pageTab{flex:1}}
+    .shopToggle{min-width:92px;border:0;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:750;transition:background .16s,color .16s}.shopToggle.enabled{background:var(--mint);color:var(--green)}.shopToggle.disabled{background:#ecece7;color:var(--muted)}.shopToggle:focus-visible{outline:3px solid #71907a;outline-offset:2px}.shopSettings{max-width:760px;padding:20px}.shopSettings .sites{margin-top:0}.shopSettings .sites li{padding:14px 4px}
+    .artSearch{padding:20px;margin:26px 0}.artGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:13px;margin-top:16px}.artOption{padding:12px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px}.artOption img,.artWishImage{width:110px;max-width:100%;height:auto;border-radius:8px;box-shadow:0 3px 12px #18251f20}.artOption .primary{margin-top:7px}.artWishCell{display:flex;align-items:center;gap:11px;min-width:210px}.artWishImage{width:48px}.artTable{min-width:720px}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topline"><div class="brand"><span class="sigil">✦</span><span>Mana Market</span></div><nav class="pageTabs" aria-label="Main pages"><button class="pageTab active" id="navSearch" aria-current="page">Search cards</button><button class="pageTab" id="navArt">Art &amp; printings</button><button class="pageTab" id="navWishlist">Wishlist <span class="navCount" id="navWishCount">0</span></button><button class="pageTab" id="navShops">Card shops</button></nav><span class="local">Personal app · saved on this device</span></header>
+    <section id="searchPage">
+    <section class="hero"><div class="eyebrow">Your card shop companion</div><h1>Find the cards<br>you’re looking for.</h1><p>Search a batch of Magic cards, check your shops, and keep a wishlist close at hand.</p></section>
+    <section class="search card" aria-label="Search cards"><label class="label">Cards to search</label><div class="cardinputs" id="cardInputs"><div class="cardinputrow"><span class="cardindex">1</span><input class="input" type="text" data-card-input placeholder="Enter a Magic card name" aria-label="Card 1"><button class="removeCard" type="button" aria-label="Remove card field" hidden>Remove</button></div></div><div class="searchactions"><button class="secondary" id="addCard">＋ Add card</button><button class="primary" id="searchBtn">Search cards <span aria-hidden="true">→</span></button></div><div class="searchhint">Add a separate cell for every card you want to search.</div><div class="status" id="status" aria-live="polite"></div></section>
+    <div class="workspace"><section><div class="sectionhead"><h2>Search results</h2><span class="count" id="resultCount">Search for cards to begin</span></div><div class="card tablewrap"><table class="results"><thead id="resultsHead"><tr><th>Card</th><th>Fizzy Hobby Store</th></tr></thead><tbody id="resultsBody"><tr><td colspan="2"><div class="empty"><b>Your next find starts here</b>Enter card names above to begin.</div></td></tr></tbody></table></div><div class="foot">One row per card. Each shop column shows its cheapest printing; choose “Remove printing” to reveal the next price. Lung Ji stock is read from its public Archidekt catalog on each lookup (cached for up to one minute); prices use the Card Kingdom USD price field.</div></section></div>
+    </section>
+    <section id="wishlistPage" class="wishlistPage" hidden><div class="sectionhead"><div><div class="eyebrow">Your saved cards</div><h1>Wishlist</h1></div><div class="wishControls"><span class="count" id="wishCount">0 cards</span><button class="secondary" id="refreshWish">Refresh prices ↻</button></div></div><div class="card tablewrap"><table class="results wishlistTable"><thead id="wishHead"></thead><tbody id="wishList"></tbody></table></div><p class="foot">Each saved card is listed once. Prices and availability are shown by shop when a live connection is available.</p></section>
+    <section id="artPage" class="wishlistPage" hidden><div class="sectionhead"><div><div class="eyebrow">Choose the exact artwork</div><h1>Art &amp; printings</h1></div></div><section class="card artSearch"><label class="label" for="artQuery">Search for a card</label><div class="searchrow"><input class="input" id="artQuery" placeholder="Enter a Magic card name"><button class="primary" id="artSearchBtn">Find printings →</button></div><div class="status" id="artStatus" aria-live="polite"></div><div class="artGrid" id="artChoices"></div></section><div class="sectionhead"><h2>Art wishlist</h2><div class="wishControls"><span class="count" id="artWishCount">0 printings</span><button class="secondary" id="refreshArtWish">Refresh prices ↻</button></div></div><div class="card tablewrap"><table class="results artTable"><thead id="artWishHead"></thead><tbody id="artWishList"></tbody></table></div><p class="foot">Printings are selected from Scryfall. Shop prices and stock are shown only where the shop data identifies the selected set or printing.</p></section>
+    <section id="shopsPage" class="wishlistPage" hidden><div class="sectionhead"><div><div class="eyebrow">Manage your stores</div><h1>Card shops</h1></div></div><section class="side card shopSettings"><h2>Your card shops</h2><p class="sidecopy">Turn shops on or off to choose which ones are included in searches and price refreshes.</p><ul class="sites" id="siteList"></ul><p class="note">Disabled shops stay in your list and can be turned back on at any time.</p></section></section>
+  </main><div class="toast" id="toast" role="status"></div>
+  <script>
+    const STORAGE={sites:'mana-market-sites-v1',wish:'mana-market-wishlist-v1'};
+    const defaultSites=[{id:'fizzy',name:'Fizzy Hobby Store',url:'https://www.fizzyhobbystore.com'},{id:'lungji-archidekt',name:'Lung Ji',url:'https://archidekt.com/collection/v2/366983'},{id:'yannick',name:'Yannick',url:'https://yannickthegathering.com'},{id:'power9',name:'Power 9',url:'https://power9cardstore.com'},{id:'sabai',name:'Sabai Card',url:'https://sabaicards.com'},{id:'hobbybugong',name:'Hobby Bugong',url:'https://www.hobbybugong.com/shop/mtg/singles'}];
+    let sites=read(STORAGE.sites,defaultSites),wishlist=read(STORAGE.wish,[]),artWishlist=read('mana-market-art-wishlist-v1',[]),artPrintings=[],artPrices=new Map(),artBusy=false,cards=[],shopResults=new Map(),wishlistPrices=new Map(),excludedPrintings=new Map();
+    if(!sites.some(isArchidekt)){sites=sites.filter(s=>host(s.url)!=='archidekt.com');sites.push(defaultSites[1]);localStorage.setItem(STORAGE.sites,JSON.stringify(sites))}
+    const lungJiSite=sites.find(isArchidekt);if(lungJiSite&&lungJiSite.name!=='Lung Ji'){lungJiSite.name='Lung Ji';localStorage.setItem(STORAGE.sites,JSON.stringify(sites))}
+    if(!sites.some(s=>host(s.url)==='yannickthegathering.com')){sites.push(defaultSites[2]);localStorage.setItem(STORAGE.sites,JSON.stringify(sites))}
+    if(!sites.some(s=>host(s.url)==='power9cardstore.com')){sites.push(defaultSites[3]);localStorage.setItem(STORAGE.sites,JSON.stringify(sites))}
+    if(!sites.some(s=>host(s.url)==='sabaicards.com')){sites.push(defaultSites[4]);localStorage.setItem(STORAGE.sites,JSON.stringify(sites))}
+    if(!sites.some(s=>host(s.url)==='hobbybugong.com')){sites.push(defaultSites[5]);localStorage.setItem(STORAGE.sites,JSON.stringify(sites))}
+    const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function read(key,fallback){try{const v=JSON.parse(localStorage.getItem(key));return Array.isArray(v)?v:fallback}catch{return fallback}}
+    function save(){localStorage.setItem(STORAGE.sites,JSON.stringify(sites));localStorage.setItem(STORAGE.wish,JSON.stringify(wishlist))}
+    function host(url){try{return new URL(url).hostname.replace(/^www\./,'')}catch{return url}}
+    function activeSites(){return sites.filter(s=>s.enabled!==false)}
+    function storeSearch(site,name){if(isArchidekt(site))return site.url;if(isSabai(site))return site.url.replace(/\/$/,'')+'/products/singles?search='+encodeURIComponent(name);if(isHobbyBugong(site))return 'https://www.hobbybugong.com/shop/mtg/singles?search='+encodeURIComponent(name);if(host(site.url)==='yannickthegathering.com'||host(site.url)==='power9cardstore.com')return site.url.replace(/\/$/,'')+'/search?q='+encodeURIComponent(name)+'&type=product';return 'https://www.google.com/search?q='+encodeURIComponent('site:'+host(site.url)+' "'+name+'"')}
+    function isFizzy(site){return host(site.url)==='fizzyhobbystore.com'}
+    function isYannick(site){return host(site.url)==='yannickthegathering.com'}
+    function isPower9(site){return host(site.url)==='power9cardstore.com'}
+    function isSabai(site){return host(site.url)==='sabaicards.com'}
+    function isHobbyBugong(site){return host(site.url)==='hobbybugong.com'}
+    function isArchidekt(site){try{const u=new URL(site.url);return u.hostname.replace(/^www\./,'')==='archidekt.com'&&u.pathname.includes('/collection/v2/366983')}catch{return false}}
+    function keyFor(name,site){return name.toLowerCase()+'|'+site.id}function artPriceKey(print,site){return print.id+'|'+site.id}
+    function productHref(product){if(product.url)return product.url;return 'https://www.fizzyhobbystore.com/card/detail/magic-the-gathering-9qg3lqd905/'+encodeURIComponent(product.slug||'')+'?paper='+encodeURIComponent(product.paper||'nonFoil')}
+    function formatPrice(product){const value=Number(product.price);if(!Number.isFinite(value))return'Price unavailable';const digits=value.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});if(product.currency==='USD')return'$'+digits;if(product.currency==='THB')return'฿'+digits;return product.currency?product.currency+' '+digits:digits}
+    function printingKey(product){const id=String(product.id||product.product_id||product.slug||`${product.name||''}|${product.group_name||''}|${product.price||''}`);return id+(product.paper?'|'+product.paper:'')}
+    function renderSites(){ $('#siteList').innerHTML=sites.length?sites.map(s=>{const connected=s.platform==='shopify'||isFizzy(s)||isArchidekt(s)||isYannick(s)||isPower9(s)||isSabai(s)||isHobbyBugong(s);const status=connected?'Live lookup connected':(s.connectionMessage||(host(s.url)==='greyogregames.com'?'Automatic lookup blocked by the shop’s security check.':'Manual search only'));const enabled=s.enabled!==false;return`<li><div class="siteinfo"><div class="sitename">${esc(s.name)}</div><div class="siteurl">${esc(host(s.url))}</div><div class="cardset">${esc(status)}</div></div><button class="shopToggle ${enabled?'enabled':'disabled'}" type="button" role="switch" aria-checked="${enabled}" data-toggle-shop="${esc(s.id)}" aria-label="${enabled?'Disable':'Enable'} ${esc(s.name)}">${enabled?'Enabled':'Disabled'}</button></li>`}).join(''):'<li class="note">No shops configured.</li>'; }
+    function renderWish(){
+      const enabled=activeSites();
+      $('#wishCount').textContent=`${wishlist.length} ${wishlist.length===1?'card':'cards'}`;
+      $('#navWishCount').textContent=wishlist.length;
+      $('#wishHead').innerHTML=`<tr><th>Card</th>${enabled.map(s=>`<th>${esc(s.name)}</th>`).join('')}<th></th></tr>`;
+      if(!wishlist.length){$('#wishList').innerHTML=`<tr><td colspan="${enabled.length+2}" class="note">Save a card from search results to add it to your wishlist.</td></tr>`;return}
+    $('#wishList').innerHTML=wishlist.map((w,i)=>`<tr><td><span class="cardname">${esc(w.name)}</span></td>${enabled.map(s=>{const result=wishlistPrices.get(keyFor(w.name,s));if(!result)return'<td class="count">Not refreshed</td>';if(result.error)return`<td><span class="check">${esc(result.message||'Unavailable')}</span></td>`;if(result.manual)return`<td><a class="storelink" href="${esc(storeSearch(s,w.name))}" target="_blank" rel="noopener">${isArchidekt(s)?'Open Lung Ji catalog ↗':'Not connected · Search ↗'}</a><div class="cardset">${isArchidekt(s)?'Check current listing, price and stock in catalog':'Live lookup unavailable'}</div></td>`;if(!result.products.length)return'<td><span class="check">Not listed</span></td>';const p=result.products[0];if(stockQuantity(p)===0)return'<td><span class="check">Out of stock</span></td>';return`<td><a class="storelink" href="${esc(productHref(p))}" target="_blank" rel="noopener">${formatPrice(p)}</a><div class="cardset">${esc(p.priceSource||'')}</div><div class="cardset">${availabilityText(p)}</div></td>`}).join('')}<td><button class="remove" data-unwish="${i}" aria-label="Remove ${esc(w.name)} from wishlist">Remove</button></td></tr>`).join('');
+    }
+    function renderArtChoices(){const saved=new Set(artWishlist.map(p=>p.id));$('#artChoices').innerHTML=artPrintings.map(p=>{const image=p.image_uris?.normal||p.image_uris?.large||p.card_faces?.[0]?.image_uris?.normal||'';const detail=`${p.set_name||p.set.toUpperCase()} · #${p.collector_number||'?'}`;return`<article class="artOption card">${image?`<img loading="lazy" src="${esc(image)}" alt="${esc(p.name)} — ${esc(detail)}">`:'<div class="empty">Image unavailable</div>'}<strong>${esc(p.name)}</strong><span class="cardset">${esc(detail)}</span><span class="cardset">${esc(p.rarity||'')}</span><button class="${saved.has(p.id)?'secondary':'primary'}" data-art-save="${esc(p.id)}" ${saved.has(p.id)?'disabled':''}>${saved.has(p.id)?'Saved ✓':'♡ Add to art wishlist'}</button></article>`}).join('')}
+    function renderArtWishlist(){const head=$('#artWishHead'),body=$('#artWishList'),enabled=activeSites();$('#artWishCount').textContent=`${artWishlist.length} ${artWishlist.length===1?'printing':'printings'}`;head.innerHTML=`<tr><th>Selected printing</th>${enabled.map(s=>`<th>${esc(s.name)}</th>`).join('')}<th></th></tr>`;if(!artWishlist.length){body.innerHTML=`<tr><td colspan="${enabled.length+2}" class="note">Search for a card above and add a particular printing to your art wishlist.</td></tr>`;return}body.innerHTML=artWishlist.map((p,i)=>{const image=p.image||'';const details=`${p.set_name||p.set?.toUpperCase()||''} · #${p.collector_number||'?'}`;return`<tr><td><div class="artWishCell">${image?`<img class="artWishImage" loading="lazy" src="${esc(image)}" alt="">`:''}<div><div class="cardname">${esc(p.name)}</div><div class="cardset">${esc(details)}</div></div></div></td>${enabled.map(s=>{const result=artPrices.get(artPriceKey(p,s));if(!result)return'<td class="count">Not refreshed</td>';if(result.error)return`<td><span class="check">${esc(result.message||'Unavailable')}</span></td>`;if(result.manual)return`<td><a class="storelink" href="${esc(storeSearch(s,p.name+' '+(p.set_name||'')))}" target="_blank" rel="noopener">Search shop ↗</a></td>`;if(result.notIdentified)return'<td><span class="check">Printing not identified</span></td>';if(!result.product)return'<td><span class="check">Not listed</span></td>';const q=stockQuantity(result.product);if(q<=0)return'<td><span class="check">Out of stock</span></td>';return`<td><a class="storelink" href="${esc(productHref(result.product))}" target="_blank" rel="noopener">${formatPrice(result.product)}</a><div class="cardset">${availabilityText(result.product)}</div></td>`}).join('')}<td><button class="remove" data-art-remove="${i}">Remove</button></td></tr>`}).join('')}
+    async function searchArtPrintings(){const query=$('#artQuery').value.trim();if(!query){$('#artStatus').textContent='Enter a card name first.';return}const button=$('#artSearchBtn');button.disabled=true;$('#artStatus').textContent='Finding card versions…';$('#artChoices').innerHTML='';try{const named=await fetch('https://api.scryfall.com/cards/named?fuzzy='+encodeURIComponent(query));if(!named.ok)throw new Error('Could not find that card. Try a more exact name.');const card=await named.json();const exact=`!"${card.name}"`;const response=await fetch('https://api.scryfall.com/cards/search?q='+encodeURIComponent(exact)+'&unique=prints&order=released&dir=desc');if(!response.ok)throw new Error('Could not load the card printings. Please try again.');const payload=await response.json();artPrintings=payload.data||[];$('#artStatus').textContent=`Found ${artPrintings.length}${payload.has_more?' shown':''} printings for ${card.name}. Select an artwork to save it.`;renderArtChoices()}catch(error){$('#artStatus').textContent=error.message||'Could not load printings.'}finally{button.disabled=false}}
+    async function refreshArtPrices(){if(artBusy)return;if(!artWishlist.length){toast('Your art wishlist is empty');return}if(!activeSites().length){toast('Enable a shop before refreshing prices');return}artBusy=true;const button=$('#refreshArtWish');button.disabled=true;button.textContent='Refreshing…';button.setAttribute('aria-busy','true');try{for(const print of artWishlist){for(const site of activeSites()){const key=artPriceKey(print,site);artPrices.delete(key);renderArtWishlist();const result=await checkShop(site,print.name,true);if(result.manual||result.error)artPrices.set(key,result);else{const matches=(result.products||[]).filter(p=>matchesArtPrinting(p,print));const product=preferAvailable(matches,false)[0];artPrices.set(key,product?{product}:{notIdentified:(result.products||[]).length>0})}renderArtWishlist()}}toast('Art wishlist prices refreshed')}catch{toast('Could not refresh all art prices')}finally{artBusy=false;button.disabled=false;button.textContent='Refresh prices ↻';button.removeAttribute('aria-busy')}}
+    function renderResults(){
+      const body=$('#resultsBody');
+      $('#resultCount').textContent=`${cards.length} ${cards.length===1?'card':'cards'} · ${activeSites().length} ${activeSites().length===1?'shop':'shops'}`;
+      $('#resultsHead').innerHTML=`<tr><th>Card</th>${activeSites().map(s=>`<th>${esc(s.name)}</th>`).join('')}</tr>`;
+      if(!cards.length){body.innerHTML=`<tr><td colspan="${activeSites().length+1}"><div class="empty"><b>Your next find starts here</b>Enter card names above to begin.</div></td></tr>`;return}
+      if(!activeSites().length){body.innerHTML='<tr><td><div class="empty"><b>No shops enabled</b>Turn on at least one shop in Card shops, then search again.</div></td></tr>';return}
+      const rows=[];
+      for(const c of cards){
+        const name=c.requested||c.name;
+        const saved=wishlist.some(w=>w.name.toLowerCase()===c.name.toLowerCase());
+        const cardCell=`<div class="cardcell"><div><div class="cardname">${esc(c.name)}</div><div class="cardset">${esc(c.set||'Magic: The Gathering')}</div><button class="secondary" data-wish="${esc(c.name)}">${saved?'Saved ✓':'♡ Save'}</button></div></div>`;
+        const cells=activeSites().map(s=>{
+          const result=shopResults.get(keyFor(name,s));
+          if(!result)return'<td><span class="count">Not refreshed</span></td>';
+          if(result.error)return`<td><span class="check">${esc(result.message||'Temporarily unavailable')}</span></td>`;
+          if(result.manual)return`<td><span class="check">${isArchidekt(s)?'Catalog link':'Not connected'}</span><div><a class="storelink" href="${esc(storeSearch(s,c.name))}" target="_blank" rel="noopener">${isArchidekt(s)?'Open Lung Ji catalog ↗':'Search ↗'}</a></div>${isArchidekt(s)?'<div class="cardset">Confirm current availability and selling price in the catalog.</div>':''}</td>`;
+          const hidden=excludedPrintings.get(keyFor(name,s))||new Set();
+          const product=result.products.find(p=>!hidden.has(printingKey(p)));
+          if(!product){return`<td><span class="check">${result.products.length?'No more printings':'Not listed'}</span></td>`}
+          const quantity=stockQuantity(product);
+          if(quantity===0)return'<td><span class="check">Out of stock</span></td>';
+          const priceText=product.price==null?'—':formatPrice(product);
+          const productId=printingKey(product);
+          const displayImage=product.image_url||c.image;
+          const imageFallback=product.image_url&&c.image&&product.image_url!==c.image?` data-fallback="${esc(c.image)}"`:'';
+          const productImage=displayImage?`<a href="${esc(productHref(product))}" target="_blank" rel="noopener"><img class="shopThumb" loading="lazy" src="${esc(displayImage)}"${imageFallback} alt="${esc(product.name||c.name)}"></a>`:'';
+          return`<td><div class="shopResult">${productImage}<a class="printingName storelink" href="${esc(productHref(product))}" target="_blank" rel="noopener">${esc(product.name||c.name)}</a><div class="cardset">${esc(product.group_name||'Magic: The Gathering')}</div>${product.paper?`<div class="cardset">${product.paper==='foil'?'Foil':'Non-foil'}</div>`:''}<strong class="shopPrice">${priceText}</strong><div class="cardset">${esc(product.priceSource||'')}</div><div class="${quantity>0?'storelink':'check'}">${availabilityText(product)}</div><button class="skipPrinting" type="button" data-skip-printing="1" data-card-name="${esc(name)}" data-site-id="${esc(s.id)}" data-product-id="${esc(productId)}" title="Hide this printing and show the next cheapest">Remove printing ×</button></div></td>`
+        }).join('');
+        rows.push(`<tr><td>${cardCell}</td>${cells}</tr>`)
+      }
+      body.innerHTML=rows.join('')
+    }
+    const cleanName=s=>String(s||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+    function normalizeFizzyFinish(value){const normalized=cleanName(value);return normalized.includes('non foil')?'nonFoil':normalized.includes('foil')?'foil':''}
+    function fizzyQueryName(name){return String(name||'').replace(/\s+#\s*\d+[a-z]?\s*$/i,'').trim()}
+    function fizzyProductName(name){const raw=String(name||'').trim(),withoutParenthetical=raw.replace(/\s*\([^)]*\)\s*$/,'');return cleanName(withoutParenthetical===raw?raw.replace(/\s*(?:extended art|showcase|borderless|full art|retro frame|alternate art|anime art|surge foil|foil etched)\s*$/i,''):withoutParenthetical)}
+    async function fetchFizzyMatches(name,stock,paper){const queryName=fizzyQueryName(name),wanted=fizzyProductName(queryName),found=[];let page=1,total=Infinity;while(found.length<total&&page<=10){const params=new URLSearchParams({page:String(page),limit:'100',slug:'901',name:queryName,stock,paper});const response=await fetch('https://api.fizzyhobbystore.com/api/v1/cards?'+params.toString(),{headers:{Accept:'application/json'}});if(!response.ok)throw new Error('Shop request failed');const payload=await response.json();if(payload.success===false)throw new Error('Shop request failed');const data=payload.data||[];total=Number(payload.pagination?.total)||data.length;for(const p of data){const candidate=fizzyProductName(p.clean_name||p.name),reportedFinish=normalizeFizzyFinish(p.paper);if(candidate!==wanted&&!candidate.startsWith(wanted+' '))continue;if(reportedFinish&&reportedFinish!==paper)continue;found.push({...p,paper:reportedFinish||paper,shopStockVerified:stock==='available',...(stock==='available'?{quantityKnown:false,available:true}:{})})}if(!data.length)break;page++}return found}
+    function stockQuantity(p){if(p.shopStockVerified)return 1;if(p.quantityKnown===false)return p.available?1:0;const conditions=['condition_nm','condition_ex','condition_vg','condition_g','condition_fnm','condition_fex','condition_fvg','condition_fg'];const total=conditions.reduce((sum,k)=>sum+(Number(p[k])||0),0);return total||Number(p.quantity)||0}
+    function preferAvailable(products,includeAll){if(includeAll)return products;const available=products.filter(p=>stockQuantity(p)>0);return available.length?available:products.filter(p=>stockQuantity(p)===0)}
+    function availabilityText(p){if(p.quantityKnown===false)return p.available?'In stock':'Out of stock';const quantity=stockQuantity(p);return quantity>0?'In stock · '+quantity:'Out of stock'}
+    async function checkShop(site,name,includeAll=false){
+      if(isArchidekt(site)){
+        try{
+          const base=location.protocol==='file:'?'http://127.0.0.1:4173':'';
+          const response=await fetch(base+'/api/lungji/search?name='+encodeURIComponent(name));
+          const payload=await response.json();
+          if(!response.ok||payload.error)throw new Error(payload.error||'Live Archidekt lookup failed.');
+          let products=preferAvailable(payload.products||[],includeAll);
+          products.sort((a,b)=>(Number(a.price)||Infinity)-(Number(b.price)||Infinity));
+          return{products,checkedAt:payload.checkedAt};
+        }catch(error){
+          const message=error instanceof TypeError?'Start Mana Market.cmd, then try the search again.':error.message;
+          return{error:true,message:message||'Live Lung Ji lookup unavailable.'};
+        }
+      }
+      if(isYannick(site)){
+        try{
+          const base=location.protocol==='file:'?'http://127.0.0.1:4173':'';
+          const response=await fetch(base+'/api/yannick/search?name='+encodeURIComponent(name));
+          const payload=await response.json();
+          if(!response.ok||payload.error)throw new Error(payload.error||'Live Yannick lookup failed.');
+          let products=preferAvailable(payload.products||[],includeAll);
+          products.sort((a,b)=>(Number(a.price)||Infinity)-(Number(b.price)||Infinity));
+          return{products,checkedAt:payload.checkedAt};
+        }catch(error){
+          const message=error instanceof TypeError?'Start Mana Market.cmd, then try the search again.':error.message;
+          return{error:true,message:message||'Live Yannick lookup unavailable.'};
+        }
+      }
+      if(isPower9(site)){
+        try{
+          const base=location.protocol==='file:'?'http://127.0.0.1:4173':'';
+          const response=await fetch(base+'/api/power9/search?name='+encodeURIComponent(name));
+          const payload=await response.json();
+          if(!response.ok||payload.error)throw new Error(payload.error||'Live Power 9 lookup failed.');
+          let products=preferAvailable(payload.products||[],includeAll);
+          products.sort((a,b)=>(Number(a.price)||Infinity)-(Number(b.price)||Infinity));
+          return{products,checkedAt:payload.checkedAt};
+        }catch(error){
+          const message=error instanceof TypeError?'Start Mana Market.cmd, then try the search again.':error.message;
+          return{error:true,message:message||'Live Power 9 lookup unavailable.'};
+        }
+      }
+      if(site.platform==='shopify'){
+        try{
+          const base=location.protocol==='file:'?'http://127.0.0.1:4173':'';
+          const params=new URLSearchParams({name,url:site.url,currency:site.currency||''});
+          const response=await fetch(base+'/api/shopify/search?'+params.toString());
+          const payload=await response.json();
+          if(!response.ok||payload.error)throw new Error(payload.error||'Live shop lookup failed.');
+          const allProducts=payload.products||[];
+          let products=preferAvailable(allProducts,includeAll);
+          products.sort((a,b)=>(Number(a.price)||Infinity)-(Number(b.price)||Infinity));
+          return{products,checkedAt:payload.checkedAt};
+        }catch(error){
+          const message=error instanceof TypeError?'Start Mana Market.cmd, then try the search again.':error.message;
+          return{error:true,message:message||'Live shop lookup unavailable.'};
+        }
+      }
+      if(isSabai(site)){
+        try{
+          const base=location.protocol==='file:'?'http://127.0.0.1:4173':'';
+          const response=await fetch(base+'/api/sabai/search?name='+encodeURIComponent(name));
+          const payload=await response.json();
+          if(!response.ok||payload.error)throw new Error(payload.error||'Live Sabai Card lookup failed.');
+          const allProducts=payload.products||[];
+          let products=preferAvailable(allProducts,includeAll);
+          products.sort((a,b)=>(Number(a.price)||Infinity)-(Number(b.price)||Infinity));
+          return{products,checkedAt:payload.checkedAt};
+        }catch(error){
+          const message=error instanceof TypeError?'Start Mana Market.cmd, then try the search again.':error.message;
+          return{error:true,message:message||'Live Sabai Card lookup unavailable.'};
+        }
+      }
+      if(isHobbyBugong(site)){
+        try{
+          const base=location.protocol==='file:'?'http://127.0.0.1:4173':'';
+          const response=await fetch(base+'/api/hobbybugong/search?name='+encodeURIComponent(name));
+          const payload=await response.json();
+          if(!response.ok||payload.error)throw new Error(payload.error||'Live Hobby Bugong lookup failed.');
+          const allProducts=payload.products||[];
+          let products=preferAvailable(allProducts,includeAll);
+          products.sort((a,b)=>(Number(a.price)||Infinity)-(Number(b.price)||Infinity));
+          return{products,checkedAt:payload.checkedAt};
+        }catch(error){
+          const message=error instanceof TypeError?'Start Mana Market.cmd, then try the search again.':error.message;
+          return{error:true,message:message||'Live Hobby Bugong lookup unavailable.'};
+        }
+      }
+      if(!isFizzy(site))return{manual:true};
+      try{
+        let products=[];
+        if(includeAll){let available=[];for(const paper of ['nonFoil','foil']){available.push(...await fetchFizzyMatches(name,'available',paper));products.push(...await fetchFizzyMatches(name,'all',paper))}const availableKeys=new Set(available.map(printingKey));products=products.map(p=>availableKeys.has(printingKey(p))?{...p,shopStockVerified:true,quantityKnown:false,available:true}:p)}
+        else{for(const paper of ['nonFoil','foil'])products.push(...await fetchFizzyMatches(name,'available',paper));if(!products.length)for(const paper of ['nonFoil','foil'])products.push(...await fetchFizzyMatches(name,'all',paper))}
+        products.sort((a,b)=>(Number(a.price)||Infinity)-(Number(b.price)||Infinity));
+        return{products};
+      }catch{return{error:true}}
+    }
+    async function refreshWishlistPrices(onlyName){const entries=onlyName?wishlist.filter(w=>w.name.toLowerCase()===onlyName.toLowerCase()):wishlist;const button=$('#refreshWish');if(button.disabled)return;if(!entries.length){toast('Your wishlist is empty');return}if(!activeSites().length){toast('Enable a shop before refreshing prices');return}button.disabled=true;button.textContent='Refreshing…';button.setAttribute('aria-busy','true');try{for(const w of entries){for(const site of activeSites()){const key=keyFor(w.name,site);wishlistPrices.delete(key);renderWish();const result=await checkShop(site,w.name);wishlistPrices.set(key,result);renderWish()}}toast('Wishlist prices refreshed')}catch(error){toast('Could not refresh all prices')}finally{button.disabled=false;button.textContent='Refresh prices ↻';button.removeAttribute('aria-busy')}}
+    async function lookup(name){try{const res=await fetch('https://api.scryfall.com/cards/named?fuzzy='+encodeURIComponent(name));if(!res.ok)throw new Error();const c=await res.json();return{name:c.name,set:c.set_name,image:c.image_uris?.small||c.card_faces?.[0]?.image_uris?.small||'',requested:name}}catch{return{name,requested:name,set:'Card details unavailable',image:''}}}
+    async function runSearch(){const names=[...new Set(Array.from(document.querySelectorAll('[data-card-input]')).map(input=>input.value.trim()).filter(Boolean))];if(!names.length){$('#status').textContent='Enter at least one card name.';return}if(names.length>100){$('#status').textContent='Please search up to 100 cards at a time.';return}$('#searchBtn').disabled=true;cards=[];shopResults.clear();excludedPrintings.clear();renderResults();for(let i=0;i<names.length;i++){ $('#status').textContent=`Looking up card ${i+1} of ${names.length}…`;if(i)await new Promise(resolve=>setTimeout(resolve,120));const card=await lookup(names[i]);cards.push(card);renderResults();for(const site of activeSites()){const result=await checkShop(site,card.requested||card.name);shopResults.set(keyFor(card.requested||card.name,site),result);renderResults()}}$('#status').textContent=`Showing live shop results for ${cards.length} card${cards.length===1?'':'s'}. Prices and stock are from the latest shop response.`;$('#searchBtn').disabled=false}
+    function renumberCardInputs(){const rows=Array.from(document.querySelectorAll('.cardinputrow'));rows.forEach((row,index)=>{row.querySelector('.cardindex').textContent=index+1;const input=row.querySelector('[data-card-input]');input.setAttribute('aria-label','Card '+(index+1));const remove=row.querySelector('.removeCard');if(remove)remove.hidden=rows.length===1})}
+    function addCardInput(){const row=document.createElement('div');row.className='cardinputrow';row.innerHTML='<span class="cardindex"></span><input class="input" type="text" data-card-input placeholder="Enter a Magic card name"><button class="removeCard" type="button" aria-label="Remove card field">Remove</button>';$('#cardInputs').append(row);renumberCardInputs();row.querySelector('input').focus()}
+    function showPage(page){const pages={search:'#searchPage',art:'#artPage',wishlist:'#wishlistPage',shops:'#shopsPage'},navs={search:'#navSearch',art:'#navArt',wishlist:'#navWishlist',shops:'#navShops'};for(const [name,selector] of Object.entries(pages))$(selector).hidden=name!==page;for(const [name,selector] of Object.entries(navs)){$(selector).classList.toggle('active',name===page);$(selector).setAttribute('aria-current',name===page?'page':'false')}}
+    $('#searchBtn').addEventListener('click',runSearch);$('#addCard').addEventListener('click',addCardInput);$('#cardInputs').addEventListener('click',e=>{const remove=e.target.closest('.removeCard');if(remove){remove.closest('.cardinputrow').remove();renumberCardInputs()}});$('#cardInputs').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();runSearch()}});$('#navSearch').addEventListener('click',()=>showPage('search'));$('#navArt').addEventListener('click',()=>showPage('art'));$('#navWishlist').addEventListener('click',()=>showPage('wishlist'));$('#navShops').addEventListener('click',()=>showPage('shops'));$('#refreshWish').addEventListener('click',()=>refreshWishlistPrices());$('#artSearchBtn').addEventListener('click',searchArtPrintings);$('#artQuery').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();searchArtPrintings()}});$('#refreshArtWish').addEventListener('click',refreshArtPrices);renumberCardInputs();
+    document.addEventListener('error',e=>{const img=e.target;if(img instanceof HTMLImageElement&&img.dataset.fallback&&!img.dataset.fallbackUsed){img.dataset.fallbackUsed='1';img.src=img.dataset.fallback}},true);
+    document.addEventListener('click',e=>{const artSave=e.target.closest('[data-art-save]');if(artSave){const p=artPrintings.find(x=>x.id===artSave.dataset.artSave);if(p&&!artWishlist.some(x=>x.id===p.id)){artWishlist.push({id:p.id,name:p.name,set:p.set,set_name:p.set_name,collector_number:p.collector_number,image:p.image_uris?.small||p.card_faces?.[0]?.image_uris?.small||'',scryfall_uri:p.scryfall_uri});localStorage.setItem('mana-market-art-wishlist-v1',JSON.stringify(artWishlist));renderArtChoices();renderArtWishlist();toast('Printing added to art wishlist')}return}const artRemove=e.target.closest('[data-art-remove]');if(artRemove){artWishlist.splice(Number(artRemove.dataset.artRemove),1);localStorage.setItem('mana-market-art-wishlist-v1',JSON.stringify(artWishlist));renderArtWishlist();return}const skip=e.target.closest('[data-skip-printing]');if(skip){const site=sites.find(s=>s.id===skip.dataset.siteId);if(site){const key=keyFor(skip.dataset.cardName,site),hidden=excludedPrintings.get(key)||new Set();hidden.add(skip.dataset.productId);excludedPrintings.set(key,hidden);renderResults();toast('Printing removed; showing the next cheapest')}return}const toggle=e.target.closest('[data-toggle-shop]');if(toggle){const shop=sites.find(s=>s.id===toggle.dataset.toggleShop);if(shop){shop.enabled=shop.enabled===false;save();for(const cache of [shopResults,wishlistPrices,artPrices])for(const key of cache.keys())if(key.endsWith('|'+shop.id))cache.delete(key);renderSites();renderResults();renderWish();renderArtWishlist();toast(shop.enabled?'Shop enabled':'Shop disabled')}return}const w=e.target.closest('[data-wish]');if(w){const card=cards.find(c=>c.name===w.dataset.wish);if(card&&!wishlist.some(x=>x.name.toLowerCase()===card.name.toLowerCase())){wishlist.push({name:card.name});save();renderWish();toast('Card saved to wishlist')}}const u=e.target.closest('[data-unwish]');if(u){wishlist.splice(Number(u.dataset.unwish),1);save();renderWish();renderResults()}});
+    let toastTimer;function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),1500)}
+    renderSites();renderWish();renderArtWishlist();renderResults();
+  </script>
+</body>
+</html>
