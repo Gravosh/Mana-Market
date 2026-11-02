@@ -22,7 +22,6 @@
     @media(max-width:520px){.searchactions{align-items:stretch;flex-direction:column}.searchactions button{width:100%}.wishControls{gap:6px}.wishlistPage .sectionhead h1{font-size:30px}.pageTab{flex:1}}
     .shopToggle{min-width:92px;border:0;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:750;transition:background .16s,color .16s}.shopToggle.enabled{background:var(--mint);color:var(--green)}.shopToggle.disabled{background:#ecece7;color:var(--muted)}.shopToggle:focus-visible{outline:3px solid #71907a;outline-offset:2px}.shopSettings{max-width:760px;padding:20px}.shopSettings .sites{margin-top:0}.shopSettings .sites li{padding:14px 4px}
     .artSearch{padding:20px;margin:26px 0}.artGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:13px;margin-top:16px}.artOption{padding:12px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px}.artOption img,.artWishImage{width:110px;max-width:100%;height:auto;border-radius:8px;box-shadow:0 3px 12px #18251f20}.artOption .primary{margin-top:7px}.artWishCell{display:flex;align-items:center;gap:11px;min-width:210px}.artWishImage{width:48px}.artTable{min-width:720px}
-    .results{table-layout:fixed}.cardcell{min-width:0}.shopResult{min-width:0;overflow-wrap:anywhere}.shopThumb{max-width:100%}
   </style>
 </head>
 <body>
@@ -96,12 +95,8 @@
     async function refreshArtPrices(){if(artBusy)return;if(!artWishlist.length){toast('Your art wishlist is empty');return}if(!activeSites().length){toast('Enable a shop before refreshing prices');return}artBusy=true;const button=$('#refreshArtWish');button.disabled=true;button.textContent='Refreshing…';button.setAttribute('aria-busy','true');try{for(const print of artWishlist){for(const site of activeSites()){const key=artPriceKey(print,site);artPrices.delete(key);renderArtWishlist();const result=await checkShop(site,print.name,true);if(result.manual||result.error)artPrices.set(key,result);else{const matches=(result.products||[]).filter(p=>matchesArtPrinting(p,print));const product=preferAvailable(matches,false)[0];artPrices.set(key,product?{product}:{notIdentified:(result.products||[]).length>0})}renderArtWishlist()}}toast('Art wishlist prices refreshed')}catch(error){const message=error?.message||'Unexpected refresh error';console.error('Art wishlist price refresh failed:',error);$('#artStatus').textContent=`Price refresh stopped: ${message}`;toast('Price refresh stopped — see the message above')}finally{artBusy=false;button.disabled=false;button.textContent='Refresh prices ↻';button.removeAttribute('aria-busy')}}
     function renderResults(){
       const body=$('#resultsBody');
-      const enabled=activeSites(),table=$('#resultsHead').closest('table');
-      $('#resultCount').textContent=`${cards.length} ${cards.length===1?'card':'cards'} · ${enabled.length} ${enabled.length===1?'shop':'shops'}`;
-      table.style.minWidth=`${Math.max(590,240+enabled.length*150)}px`;
-      table.querySelector('colgroup')?.remove();
-      table.insertAdjacentHTML('afterbegin',`<colgroup><col style="width:22%">${enabled.map(()=>'<col style="width:'+((78/Math.max(enabled.length,1)).toFixed(4))+'%">').join('')}</colgroup>`);
-      $('#resultsHead').innerHTML=`<tr><th>Card</th>${enabled.map(s=>`<th>${esc(s.name)}</th>`).join('')}</tr>`;
+      $('#resultCount').textContent=`${cards.length} ${cards.length===1?'card':'cards'} · ${activeSites().length} ${activeSites().length===1?'shop':'shops'}`;
+      $('#resultsHead').innerHTML=`<tr><th>Card</th>${activeSites().map(s=>`<th>${esc(s.name)}</th>`).join('')}</tr>`;
       if(!cards.length){body.innerHTML=`<tr><td colspan="${activeSites().length+1}"><div class="empty"><b>Your next find starts here</b>Enter card names above to begin.</div></td></tr>`;return}
       if(!activeSites().length){body.innerHTML='<tr><td><div class="empty"><b>No shops enabled</b>Turn on at least one shop in Card shops, then search again.</div></td></tr>';return}
       const rows=[];
@@ -109,7 +104,7 @@
         const name=c.requested||c.name;
         const saved=wishlist.some(w=>w.name.toLowerCase()===c.name.toLowerCase());
         const cardCell=`<div class="cardcell"><div><div class="cardname">${esc(c.name)}</div><div class="cardset">${esc(c.set||'Magic: The Gathering')}</div><button class="secondary" data-wish="${esc(c.name)}">${saved?'Saved ✓':'♡ Save'}</button></div></div>`;
-        const cells=enabled.map(s=>{
+        const cells=activeSites().map(s=>{
           const result=shopResults.get(keyFor(name,s));
           if(!result)return'<td><span class="count">Not refreshed</span></td>';
           if(result.error)return`<td><span class="check">${esc(result.message||'Temporarily unavailable')}</span></td>`;
